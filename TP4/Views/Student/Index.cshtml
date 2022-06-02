@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TP4.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary btn-sm">Create New</a>
+</p>
+<br/>
+<form class="d-flex" asp-action="Search" asp-controller="Student">
+    <select asp-items="ViewBag.SchoolID" class="btn btn-secondary my-2 my-sm-0" name="schoolid" size=1.5 style="width:130px ; height:48px" ></select>
+        <input class="form-control me-sm-2" name="name" type="search" placeholder="tapez un Nom" style="width:200px "size="30">
+        <button type="submit" class="btn btn-outline-info">Search</button>
+</form>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.School)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.School.SchoolID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StudentId" class="btn btn-primary btn-sm">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StudentId" class="btn btn-primary btn-sm">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StudentId" class="btn btn-primary btn-sm">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
